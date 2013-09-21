@@ -8,6 +8,7 @@
         <attr name="layout_horizontalSpacing" format="dimension"/>
         <attr name="layout_verticalSpacing" format="dimension"/>
     </declare-styleable>
+<<<<<<< HEAD
 
     <!--
         WPTextView attribute to enable switching between regular and light Open Sans typeface (see widgets/WPTextView)
@@ -27,4 +28,6 @@
         <attr name="numColumns" format="integer" />
         <attr name="itemMargin" format="dimension" />
     </declare-styleable>
+=======
+>>>>>>> origin/master
 </resources>

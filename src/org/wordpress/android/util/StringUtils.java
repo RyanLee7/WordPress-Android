@@ -69,19 +69,34 @@ public class StringUtils {
         wrappedHTML = wrappedHTML.replace("<br>\n", "<br>").replace("\n", "<br>");
         return wrappedHTML;
     }
+<<<<<<< HEAD
 
     public static BigInteger getMd5IntHash(String input) {
+=======
+    
+    public static String getMd5Hash(String input) {
+>>>>>>> origin/master
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] messageDigest = md.digest(input.getBytes());
             BigInteger number = new BigInteger(1, messageDigest);
+<<<<<<< HEAD
             return number;
+=======
+            String md5 = number.toString(16);
+
+            while (md5.length() < 32)
+                md5 = "0" + md5;
+
+            return md5;
+>>>>>>> origin/master
         } catch (NoSuchAlgorithmException e) {
             Log.e("MD5", e.getLocalizedMessage());
             return null;
         }
     }
 
+<<<<<<< HEAD
     public static String getMd5Hash(String input) {
         BigInteger number = getMd5IntHash(input);
         String md5 = number.toString(16);
@@ -90,12 +105,15 @@ public class StringUtils {
         return md5;
     }
 
+=======
+>>>>>>> origin/master
     public static String unescapeHTML(String html) {
         if (html != null)
             return Html.fromHtml(html).toString();
         else
             return "";
     }
+<<<<<<< HEAD
 
     /*
      * returns empty string if passed string is null, otherwise returns passed string
@@ -124,4 +142,6 @@ public class StringUtils {
                 .append(str.substring(1))
                 .toString();
     }
+=======
+>>>>>>> origin/master
 }

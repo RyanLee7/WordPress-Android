@@ -24,6 +24,7 @@ public class Constants {
      * well as embedded WebViews.
      */
     public static final String USER_AGENT = "wp-android";
+<<<<<<< HEAD
 
     /*
      * Reader constants
@@ -43,4 +44,6 @@ public class Constants {
     public static final int INTENT_READER_TOPICS      = 1001;
     public static final int INTENT_READER_REBLOG      = 1002;
 
+=======
+>>>>>>> origin/master
 }

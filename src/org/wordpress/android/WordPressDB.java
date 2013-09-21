@@ -1,5 +1,23 @@
 package org.wordpress.android;
 
+<<<<<<< HEAD
+=======
+import java.text.StringCharacterIterator;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Vector;
+
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.DESKeySpec;
+
+>>>>>>> origin/master
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +28,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.preference.PreferenceManager;
 import android.util.Base64;
+<<<<<<< HEAD
 import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,6 +58,20 @@ import java.util.Vector;
 public class WordPressDB {
 
     private static final int DATABASE_VERSION = 20;
+=======
+
+import org.json.JSONArray;
+
+import org.wordpress.android.models.MediaFile;
+import org.wordpress.android.models.Post;
+import org.wordpress.android.models.Theme;
+import org.wordpress.android.ui.posts.EditPostActivity;
+import org.wordpress.android.util.Utils;
+
+public class WordPressDB {
+
+    private static final int DATABASE_VERSION = 19;
+>>>>>>> origin/master
 
     private static final String CREATE_TABLE_SETTINGS = "create table if not exists accounts (id integer primary key autoincrement, "
             + "url text, blogName text, username text, password text, imagePlacement text, centerThumbnail boolean, fullSizeImage boolean, maxImageWidth text, maxImageWidthId integer, lastCommentId integer, runService boolean);";
@@ -125,11 +158,14 @@ public class WordPressDB {
     private static final String ADD_MEDIA_DATE_GMT = "alter table media add date_created_gmt date;";
     private static final String ADD_MEDIA_UPLOAD_STATE = "alter table media add uploadState default '';";
 
+<<<<<<< HEAD
     // create table to store notifications
     private static final String NOTES_TABLE = "notes";
     private static final String CREATE_TABLE_NOTES = "create table if not exists notes (id integer primary key, " +
             "note_id text, message text, type text, raw_note_data text, timestamp integer, placeholder boolean);";
 
+=======
+>>>>>>> origin/master
     private SQLiteDatabase db;
 
     protected static final String PASSWORD_SECRET = Config.DB_SECRET;
@@ -154,7 +190,10 @@ public class WordPressDB {
         db.execSQL(CREATE_TABLE_QUICKPRESS_SHORTCUTS);
         db.execSQL(CREATE_TABLE_MEDIA);
         db.execSQL(CREATE_TABLE_THEMES);
+<<<<<<< HEAD
         db.execSQL(CREATE_TABLE_NOTES);
+=======
+>>>>>>> origin/master
 
         // Update tables for new installs and app updates
         try {
@@ -217,10 +256,13 @@ public class WordPressDB {
                     db.execSQL(ADD_MEDIA_BLOG_ID);
                     db.execSQL(ADD_MEDIA_DATE_GMT);
                     db.execSQL(ADD_MEDIA_UPLOAD_STATE);
+<<<<<<< HEAD
                     currentVersion++;
                 case 19:
                     // revision 20: create table "notes"
                     currentVersion++;
+=======
+>>>>>>> origin/master
             }
             db.setVersion(DATABASE_VERSION);
         } catch (SQLException e) {
@@ -1835,12 +1877,20 @@ public class WordPressDB {
     }
     
     public Cursor getThemes(String blogId, String searchTerm) {
+<<<<<<< HEAD
         return db.rawQuery("SELECT _id,  themeId, name, screenshotURL, isCurrent, isPremium FROM " + THEMES_TABLE + " WHERE blogId=? AND (name LIKE ? OR description LIKE ?) ORDER BY name ASC", new String[] {blogId, "%" + searchTerm + "%", "%" + searchTerm + "%"});
+=======
+        return db.rawQuery("SELECT _id,  themeId, name, screenshotURL, isCurrent, isPremium FROM " + THEMES_TABLE + " WHERE blogId=? AND (name LIKE ? OR description LIKE ?) ORDER BY name ASC", new String[] {blogId, "%" + searchTerm + "%", "%" + searchTerm + "%"}); 
+>>>>>>> origin/master
         
     }
     
     public Theme getTheme(String blogId, String themeId) {
+<<<<<<< HEAD
         Cursor cursor = db.rawQuery("SELECT name, description, screenshotURL, previewURL, isCurrent, isPremium, features FROM " + THEMES_TABLE + " WHERE blogId=? AND themeId=?", new String[]{blogId, themeId});
+=======
+        Cursor cursor = db.rawQuery("SELECT name, description, screenshotURL, previewURL, isCurrent, isPremium, features FROM " + THEMES_TABLE + " WHERE blogId=? AND themeId=?", new String[] { blogId, themeId });
+>>>>>>> origin/master
         if (cursor.moveToFirst()) {
             String name = cursor.getString(0);
             String description = cursor.getString(1);
@@ -1869,6 +1919,7 @@ public class WordPressDB {
         
     }
 
+<<<<<<< HEAD
     public ArrayList<Note> loadNotes() {
         return loadNotes(20);
     }
@@ -1952,4 +2003,6 @@ public class WordPressDB {
     public void clearNotes() {
         db.delete(NOTES_TABLE, null, null);
     }
+=======
+>>>>>>> origin/master
 }

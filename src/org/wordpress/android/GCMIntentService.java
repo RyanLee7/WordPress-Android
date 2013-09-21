@@ -1,18 +1,31 @@
 
 package org.wordpress.android;
 
+<<<<<<< HEAD
+=======
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
+>>>>>>> origin/master
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+<<<<<<< HEAD
 import android.graphics.BitmapFactory;
+=======
+>>>>>>> origin/master
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.IntentCompat;
+<<<<<<< HEAD
 import android.util.Base64;
 import android.util.Log;
 import com.google.android.gcm.GCMBaseIntentService;
@@ -22,10 +35,20 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.wordpress.android.models.Note;
 import org.wordpress.android.ui.notifications.NotificationUtils;
+=======
+import android.util.Log;
+import android.graphics.BitmapFactory;
+
+import com.google.android.gcm.GCMBaseIntentService;
+
+import org.xmlrpc.android.WPComXMLRPCApi;
+
+>>>>>>> origin/master
 import org.wordpress.android.ui.notifications.NotificationsActivity;
 import org.wordpress.android.ui.posts.PostsActivity;
 import org.wordpress.android.util.ImageHelper;
 import org.wordpress.android.util.StringUtils;
+<<<<<<< HEAD
 import org.xmlrpc.android.WPComXMLRPCApi;
 
 import java.io.UnsupportedEncodingException;
@@ -34,6 +57,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+=======
+>>>>>>> origin/master
 
 public class GCMIntentService extends GCMBaseIntentService {
 
@@ -67,6 +92,7 @@ public class GCMIntentService extends GCMBaseIntentService {
         if (title == null)
             title = "WordPress";
         String message = StringUtils.unescapeHTML(extras.getString("msg"));
+<<<<<<< HEAD
         String note_id = extras.getString("note_id");
 
         Note note = null;
@@ -93,6 +119,13 @@ public class GCMIntentService extends GCMBaseIntentService {
             note_id = String.valueOf(WordPressDB.generateIdFor(note));
             md5GeneratedNoteId = true;
         }
+=======
+
+        String note_id = extras.getString("note_id");
+        
+        if (note_id == null)
+            note_id = StringUtils.getMd5Hash(message);
+>>>>>>> origin/master
 
         if (note_id != null) {
             if (!activeNotificationsMap.containsKey(note_id))
@@ -121,14 +154,22 @@ public class GCMIntentService extends GCMBaseIntentService {
         light = prefs.getBoolean("wp_pref_notification_light", false);
 
         NotificationCompat.Builder mBuilder;
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> origin/master
         Intent resultIntent = new Intent(this, PostsActivity.class);
         resultIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK
                 | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
         resultIntent.setAction("android.intent.action.MAIN");
         resultIntent.addCategory("android.intent.category.LAUNCHER");
         resultIntent.putExtra(NotificationsActivity.FROM_NOTIFICATION_EXTRA, true);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> origin/master
         if (activeNotificationsMap.size() <= 1) {
             mBuilder =
                     new NotificationCompat.Builder(this)
@@ -138,12 +179,19 @@ public class GCMIntentService extends GCMBaseIntentService {
                             .setTicker(message)
                             .setAutoCancel(true)
                             .setStyle(new NotificationCompat.BigTextStyle().bigText(message));
+<<<<<<< HEAD
 
             if (md5GeneratedNoteId)
                 resultIntent.putExtra(NotificationsActivity.MD5_NOTE_ID_EXTRA, note_id);
             if (note_id != null)
                 resultIntent.putExtra(NotificationsActivity.NOTE_ID_EXTRA, note_id);
 
+=======
+            
+            if (note_id != null)
+                resultIntent.putExtra(NotificationsActivity.NOTE_ID_EXTRA, note_id);
+            
+>>>>>>> origin/master
             // Add some actions if this is a comment notification
             String noteType = extras.getString("type");
             if (noteType != null && noteType.equals("c")) {
@@ -209,18 +257,29 @@ public class GCMIntentService extends GCMBaseIntentService {
             mBuilder.setSound(Uri.parse("android.resource://" + getPackageName() + "/"
                     + R.raw.notification));
         if (vibrate)
+<<<<<<< HEAD
             mBuilder.setVibrate(new long[]{
+=======
+            mBuilder.setVibrate(new long[] {
+>>>>>>> origin/master
                     500, 500, 500
             });
         if (light)
             mBuilder.setLights(0xff0000ff, 1000, 5000);
 
+<<<<<<< HEAD
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, resultIntent,
                 PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_UPDATE_CURRENT);
+=======
+        
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, resultIntent,
+                PendingIntent.FLAG_CANCEL_CURRENT);
+>>>>>>> origin/master
         mBuilder.setContentIntent(pendingIntent);
         NotificationManager mNotificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         mNotificationManager.notify(notificationId, mBuilder.build());
+<<<<<<< HEAD
         broadcastNewNotification();
     }
 
@@ -244,6 +303,9 @@ public class GCMIntentService extends GCMBaseIntentService {
                 }
             }
         }, null);
+=======
+
+>>>>>>> origin/master
     }
 
     @Override
@@ -259,7 +321,11 @@ public class GCMIntentService extends GCMBaseIntentService {
                 editor.putString("wp_pref_notifications_uuid", uuid);
                 editor.commit();
             }
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> origin/master
             new WPComXMLRPCApi().registerWPComToken(context, regId);
         }
     }

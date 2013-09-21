@@ -1,21 +1,40 @@
 package org.wordpress.android.ui.posts;
 
+<<<<<<< HEAD
+=======
+import java.util.ArrayList;
+import java.util.List;
+
+>>>>>>> origin/master
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+<<<<<<< HEAD
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+=======
+import android.text.Html;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+
+>>>>>>> origin/master
 import org.wordpress.android.R;
 import org.wordpress.android.WordPress;
 import org.wordpress.android.models.CategoryNode;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 
+=======
+>>>>>>> origin/master
 public class AddCategoryActivity extends Activity {
     private int id;
     @Override
@@ -47,7 +66,11 @@ public class AddCategoryActivity extends Activity {
                 Spinner sCategories = (Spinner) findViewById(R.id.parent_category);
                 String parent_category = "";
                 if (sCategories.getSelectedItem() != null)
+<<<<<<< HEAD
                     parent_category = ((CategoryNode)sCategories.getSelectedItem()).getName().trim();
+=======
+                    parent_category = sCategories.getSelectedItem().toString().trim();
+>>>>>>> origin/master
                 int parent_id = 0;
                 if (sCategories.getSelectedItemPosition() != 0){
                     parent_id = WordPress.wpDB.getCategoryId(id, parent_category);
@@ -101,6 +124,7 @@ public class AddCategoryActivity extends Activity {
     }
 
     private void loadCategories() {
+<<<<<<< HEAD
         CategoryNode rootCategory = CategoryNode.createCategoryTreeFromDB(id);
         ArrayList<CategoryNode> categoryLevels = CategoryNode.getSortedListOfCategoriesFromRoot(rootCategory);
         categoryLevels.add(0, new CategoryNode(0, 0, getString(R.string.none)));
@@ -109,6 +133,27 @@ public class AddCategoryActivity extends Activity {
                     R.layout.categories_row_parent, categoryLevels);
             Spinner sCategories = (Spinner) findViewById(R.id.parent_category);
             sCategories.setAdapter(categoryAdapter);
+=======
+        ArrayList<CharSequence> loadTextArray = new ArrayList<CharSequence>();
+        CategoryNode rootCategory = CategoryNode.createCategoryTreeFromDB(id);
+        ArrayList<CategoryNode> categoryLevels = CategoryNode.getSortedListOfCategoriesFromRoot(rootCategory);
+        if (categoryLevels.size() > 0) {
+            loadTextArray.add(getResources().getText(R.string.none));
+            for (int i = 0; i < categoryLevels.size(); i++) {
+                CategoryNode currentCategory = categoryLevels.get(i);
+                String name = "";
+                for (int j = 1; j < currentCategory.getLevel(); j++) {
+                    name += "  ";
+                }
+                name += Html.fromHtml(currentCategory.getName());
+                loadTextArray.add(name);
+            }
+            ArrayAdapter<CharSequence> categories = new ArrayAdapter<CharSequence>(this,
+                    android.R.layout.simple_dropdown_item_1line, loadTextArray);
+            categories.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            Spinner sCategories = (Spinner) findViewById(R.id.parent_category);
+            sCategories.setAdapter(categories);
+>>>>>>> origin/master
         }
     }
 
@@ -117,4 +162,8 @@ public class AddCategoryActivity extends Activity {
       //ignore orientation change
       super.onConfigurationChanged(newConfig);
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 }

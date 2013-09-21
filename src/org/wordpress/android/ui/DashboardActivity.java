@@ -101,6 +101,7 @@ public class DashboardActivity extends SherlockActivity {
 
     
     private void loadDashboard() {
+<<<<<<< HEAD
         String dashboardUrl = null;
         Gson gson = new Gson();
         Type type = new TypeToken<Map<?, ?>>() {}.getType();
@@ -119,6 +120,9 @@ public class DashboardActivity extends SherlockActivity {
                 dashboardUrl = mBlog.getUrl().replace("xmlrpc.php", "wp-admin");
             }
         }
+=======
+        String dashboardUrl = mBlog.getAdminUrl();
+>>>>>>> origin/master
         loadAuthenticatedUrl(dashboardUrl);
     }
     
@@ -220,8 +224,11 @@ public class DashboardActivity extends SherlockActivity {
                                               HttpAuthHandler handler, String host, String realm) {
             handler.proceed(blog.getHttpuser(), blog.getHttppassword());
         }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> origin/master
     }
 
     @Override

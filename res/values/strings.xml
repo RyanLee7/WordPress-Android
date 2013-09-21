@@ -569,7 +569,10 @@
     <string name="version">Version</string>
     <string name="tos">Terms of Service</string>
     <string name="privacy_policy">Privacy Policy</string>
+<<<<<<< HEAD
     <string name="automattic_url"><u>www.automattic.com</u></string>
+=======
+>>>>>>> origin/master
 
     <!-- Remote Post Changes -->
     <string name="local_changes">Local Changes</string>
@@ -617,6 +620,7 @@
     <string name="passcode_turn_off">Turn PIN lock off</string>
     <string name="passcode_turn_on">Turn PIN lock on</string>
 
+<<<<<<< HEAD
     <!--
        ****
        *  strings used by the native reader
@@ -710,4 +714,6 @@
     <string name="reader_empty_posts_in_topic_never_updated">No articles in this topic yet</string>
     <string name="reader_empty_followed_topics">You don\'t follow any topics</string>
     <string name="reader_empty_popular_topics">Sorry, no popular topics</string>
+=======
+>>>>>>> origin/master
 </resources>

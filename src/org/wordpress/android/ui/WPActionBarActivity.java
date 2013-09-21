@@ -53,7 +53,10 @@ import org.wordpress.android.ui.posts.PagesActivity;
 import org.wordpress.android.ui.posts.PostsActivity;
 import org.wordpress.android.ui.prefs.PreferencesActivity;
 import org.wordpress.android.ui.reader.ReaderActivity;
+<<<<<<< HEAD
 import org.wordpress.android.ui.reader_native.NativeReaderActivity;
+=======
+>>>>>>> origin/master
 import org.wordpress.android.ui.stats.StatsActivity;
 import org.wordpress.android.ui.stats.StatsActivityTablet;
 import org.wordpress.android.ui.themes.ThemeBrowserActivity;
@@ -646,23 +649,31 @@ public abstract class WPActionBarActivity extends SherlockFragmentActivity {
         
         @Override
         public Boolean isSelected(){
+<<<<<<< HEAD
             if (Constants.ENABLE_NATIVE_READER) {
                 return WPActionBarActivity.this instanceof NativeReaderActivity;
             } else {
                 return WPActionBarActivity.this instanceof ReaderActivity;
             }
+=======
+            return WPActionBarActivity.this instanceof ReaderActivity;
+>>>>>>> origin/master
         }
         @Override
         public void onSelectItem(){
             if (!(WPActionBarActivity.this instanceof ReaderActivity))
                 mShouldFinish = true;
             int readerBlogID = WordPress.wpDB.getWPCOMBlogID();
+<<<<<<< HEAD
             Intent intent;
             if (Constants.ENABLE_NATIVE_READER) {
                 intent = new Intent(WPActionBarActivity.this, NativeReaderActivity.class);
             } else {
                 intent = new Intent(WPActionBarActivity.this, ReaderActivity.class);
             }
+=======
+            Intent intent = new Intent(WPActionBarActivity.this, ReaderActivity.class);
+>>>>>>> origin/master
             intent.putExtra("id", readerBlogID);
             intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivityWithDelay(intent);
@@ -804,9 +815,13 @@ public abstract class WPActionBarActivity extends SherlockFragmentActivity {
                 mShouldFinish = true;
             
             Intent intent;
+<<<<<<< HEAD
             if (!WordPress.currentBlog.isDotcomFlag()) // redirect to old stats activity as jetpack credentials currently don't work with new stats apis
                 intent = new Intent(WPActionBarActivity.this, OldStatsActivity.class);
             else if (Utils.isTablet()) 
+=======
+            if (Utils.isTablet())
+>>>>>>> origin/master
                 intent = new Intent(WPActionBarActivity.this, StatsActivityTablet.class);
             else 
                 intent = new Intent(WPActionBarActivity.this, StatsActivity.class);

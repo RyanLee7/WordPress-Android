@@ -1,5 +1,6 @@
 package org.wordpress.android.util;
 
+<<<<<<< HEAD
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -8,6 +9,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+=======
+import android.util.Log;
+
+import org.json.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.ArrayList;
+import java.util.List;
+>>>>>>> origin/master
 
 public class JSONUtil {
     private static String QUERY_SEPERATOR=".";
@@ -16,8 +27,11 @@ public class JSONUtil {
     private static String QUERY_ARRAY_FIRST="first";
     private static String QUERY_ARRAY_LAST="last";
 
+<<<<<<< HEAD
     private static final String JSON_NULL_STR = "null";
 
+=======
+>>>>>>> origin/master
     private static final String TAG="JSONUtil";
     /**
      * Given a JSONObject and a key path (e.g property.child) and a default it will
@@ -157,6 +171,7 @@ public class JSONUtil {
         
         return jsonArray;
     }
+<<<<<<< HEAD
 
     /*
      * wrapper for JSONObject.optString() which handles "null" values
@@ -194,4 +209,6 @@ public class JSONUtil {
             return false;
         return true;
     }
+=======
+>>>>>>> origin/master
 }

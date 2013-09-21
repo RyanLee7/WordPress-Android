@@ -363,9 +363,13 @@ public class MediaGridFragment extends Fragment implements OnItemClickListener, 
                                 mGridAdapter.setRefreshing(false);
                             }
                         });
+<<<<<<< HEAD
                         
                     }
 
+=======
+                    }
+>>>>>>> origin/master
                 }
 
                 @Override

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<<<<<<< HEAD
     <color name="translucent">#80000000</color>
     <color name="transparent">#00000000</color>
 
@@ -22,6 +23,8 @@
     <color name="grey_dark">#333333</color>
     <color name="grey_extra_dark">#222222</color>
 
+=======
+>>>>>>> origin/master
 
     <!-- Default colors -->
     <color name="light_gray">#E5E5E5</color>

@@ -1,5 +1,6 @@
 package org.wordpress.android.ui.notifications;
 
+<<<<<<< HEAD
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -10,14 +11,34 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.IntentCompat;
 import android.util.Log;
+=======
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.HashSet;
+
+import android.os.Bundle;
+import android.util.Log;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+>>>>>>> origin/master
 import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+<<<<<<< HEAD
+=======
+import android.content.Intent;
+import android.support.v4.content.IntentCompat;
+
+>>>>>>> origin/master
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+<<<<<<< HEAD
 import com.android.volley.VolleyError;
 import com.wordpress.rest.RestRequest;
 import org.json.JSONException;
@@ -43,6 +64,30 @@ public class NotificationsActivity extends WPActionBarActivity {
     public static final String NOTIFICATION_ACTION = "org.wordpress.android.NOTIFICATION";
     public static final String NOTE_ID_EXTRA="noteId";
     public static final String MD5_NOTE_ID_EXTRA="md5NoteId";
+=======
+
+import org.wordpress.android.GCMIntentService;
+import org.wordpress.android.R;
+import org.wordpress.android.WordPress;
+import org.wordpress.android.ui.WPActionBarActivity;
+import org.wordpress.android.models.Note;
+import static org.wordpress.android.WordPress.*;
+
+import com.wordpress.rest.RestRequest;
+
+import com.android.volley.VolleyError;
+
+import org.json.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.Map;
+import java.util.HashMap;
+
+public class NotificationsActivity extends WPActionBarActivity {
+    public static final String TAG="WPNotifications";
+    public static final String NOTE_ID_EXTRA="noteId";
+>>>>>>> origin/master
     public static final String FROM_NOTIFICATION_EXTRA="fromNotification";
     public static final String NOTE_REPLY_EXTRA="replyContent";
     public static final String NOTE_INSTANT_REPLY_EXTRA = "instantReply";
@@ -57,8 +102,11 @@ public class NotificationsActivity extends WPActionBarActivity {
     private MenuItem mRefreshMenuItem;
     private boolean mLoadingMore = false;
     private boolean mFirstLoadComplete = false;
+<<<<<<< HEAD
     private List<Note> notes;
     private BroadcastReceiver mBroadcastReceiver;
+=======
+>>>>>>> origin/master
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -75,6 +123,17 @@ public class NotificationsActivity extends WPActionBarActivity {
         mNotesList.setNoteProvider(new NoteProvider());
         mNotesList.setOnNoteClickListener(new NoteClickListener());
 
+<<<<<<< HEAD
+=======
+        try {
+            if(WordPress.latestNotes != null){
+                mNotesList.getNotesAdapter().addAll(parseNotes(WordPress.latestNotes));                
+            }
+        } catch (JSONException e) {
+            Log.e(TAG, "No cached notes");
+        }
+
+>>>>>>> origin/master
         fragmentDetectors.add(new FragmentDetector(){
             @Override
             public Fragment getFragment(Note note){
@@ -111,6 +170,7 @@ public class NotificationsActivity extends WPActionBarActivity {
 
         if (savedInstanceState == null)
             launchWithNoteId();
+<<<<<<< HEAD
 
         // Load notes
         notes = WordPress.wpDB.loadNotes();
@@ -132,6 +192,14 @@ public class NotificationsActivity extends WPActionBarActivity {
         };
     }
 
+=======
+        refreshNotes();
+
+        if (savedInstanceState != null)
+            popNoteDetail();
+    }
+    
+>>>>>>> origin/master
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
@@ -153,6 +221,7 @@ public class NotificationsActivity extends WPActionBarActivity {
      */
     private void launchWithNoteId(){
         final Intent intent = getIntent();
+<<<<<<< HEAD
         if (intent.hasExtra(MD5_NOTE_ID_EXTRA)) {
             int hashid = Integer.valueOf(intent.getStringExtra(MD5_NOTE_ID_EXTRA));
             Note note = WordPress.wpDB.getNoteById(hashid);
@@ -161,6 +230,9 @@ public class NotificationsActivity extends WPActionBarActivity {
             }
         } else if (intent.hasExtra(NOTE_ID_EXTRA)) {
             // FIXME: check if in DB and not placeholder...
+=======
+        if (intent.hasExtra(NOTE_ID_EXTRA)) {
+>>>>>>> origin/master
             // find it/load it etc
             Map<String, String> params = new HashMap<String, String>();
             params.put("ids", intent.getStringExtra(NOTE_ID_EXTRA));
@@ -175,8 +247,11 @@ public class NotificationsActivity extends WPActionBarActivity {
                 }
             };
             restClient.getNotifications(params, handler, handler);
+<<<<<<< HEAD
         } else {
             refreshNotes();
+=======
+>>>>>>> origin/master
         }
     }
     @Override
@@ -343,6 +418,7 @@ public class NotificationsActivity extends WPActionBarActivity {
         }
     }
 
+<<<<<<< HEAD
     public void refreshNotificationsListFragment(List<Note> notes) {
         final NotificationsListFragment.NotesAdapter adapter = mNotesList.getNotesAdapter();
         adapter.clear();
@@ -354,17 +430,32 @@ public class NotificationsActivity extends WPActionBarActivity {
         }
     }
 
+=======
+>>>>>>> origin/master
     public void refreshNotes(){
         mFirstLoadComplete = false;
         shouldAnimateRefreshButton = true;
         startAnimatingRefreshButton(mRefreshMenuItem);
         NotesResponseHandler handler = new NotesResponseHandler(){
             @Override
+<<<<<<< HEAD
             public void onNotes(List<Note> notes) {
                 mFirstLoadComplete = true;
                 WordPress.wpDB.clearNotes();
                 WordPress.wpDB.saveNotes(notes);
                 refreshNotificationsListFragment(notes);
+=======
+            public void onNotes(List<Note> notes){
+                mFirstLoadComplete = true;
+                final NotificationsListFragment.NotesAdapter adapter = mNotesList.getNotesAdapter();
+                adapter.clear();
+                adapter.addAll(notes);
+                adapter.notifyDataSetChanged();
+                // mark last seen timestampe
+                if (!notes.isEmpty()) {
+                    updateLastSeen(notes.get(0).getTimestamp());                    
+                }
+>>>>>>> origin/master
                 stopAnimatingRefreshButton(mRefreshMenuItem);
             }
             @Override
@@ -380,9 +471,14 @@ public class NotificationsActivity extends WPActionBarActivity {
                 shouldAnimateRefreshButton = false;
             }
         };
+<<<<<<< HEAD
         NotificationUtils.refreshNotifications(handler, handler);
     }
 
+=======
+        WordPress.refreshNotifications(this, handler, handler);
+    }
+>>>>>>> origin/master
     protected void updateLastSeen(String timestamp){
         
         restClient.markNotificationsSeen(timestamp,
@@ -447,7 +543,12 @@ public class NotificationsActivity extends WPActionBarActivity {
         @Override
         public void onResponse(JSONObject response){
             mLoadingMore = false;
+<<<<<<< HEAD
 
+=======
+            List<Note> notes = null;
+            
+>>>>>>> origin/master
             if( response == null ) {
                 //Not sure this could ever happen, but make sure we're catching all response types
                 Log.w(TAG, "Success, but did not receive any notes");
@@ -457,7 +558,11 @@ public class NotificationsActivity extends WPActionBarActivity {
             }
             
             try {
+<<<<<<< HEAD
                 notes = NotificationUtils.parseNotes(response);
+=======
+                notes = parseNotes(response);
+>>>>>>> origin/master
                 onNotes(notes);
             } catch (JSONException e) {
                 Log.e(TAG, "Success, but can't parse the response", e);
@@ -485,6 +590,20 @@ public class NotificationsActivity extends WPActionBarActivity {
     private abstract class FragmentDetector {
         abstract public Fragment getFragment(Note note);
     }
+<<<<<<< HEAD
+=======
+    
+    public static List<Note> parseNotes(JSONObject response) throws JSONException {
+        List<Note> notes = null;
+        JSONArray notesJSON = response.getJSONArray("notes");
+        notes = new ArrayList<Note>(notesJSON.length());
+        for (int i=0; i<notesJSON.length(); i++) {
+            Note n = new Note(notesJSON.getJSONObject(i));
+            notes.add(n);
+        }
+        return notes;
+    }
+>>>>>>> origin/master
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -494,6 +613,7 @@ public class NotificationsActivity extends WPActionBarActivity {
         outState.remove(NOTE_ID_EXTRA);
         super.onSaveInstanceState(outState);
     }
+<<<<<<< HEAD
 
     @Override
     protected void onPause() {
@@ -506,4 +626,6 @@ public class NotificationsActivity extends WPActionBarActivity {
         super.onResume();
         registerReceiver(mBroadcastReceiver, new IntentFilter(NOTIFICATION_ACTION));
     }
+=======
+>>>>>>> origin/master
 }

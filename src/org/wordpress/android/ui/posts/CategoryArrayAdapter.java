@@ -14,17 +14,27 @@ import org.wordpress.android.models.CategoryNode;
 import java.util.List;
 
 public class CategoryArrayAdapter extends ArrayAdapter<CategoryNode> {
+<<<<<<< HEAD
     int mResourceId;
 
     public CategoryArrayAdapter(Context context, int resource, List<CategoryNode> objects) {
         super(context, resource, objects);
         mResourceId = resource;
+=======
+
+    public CategoryArrayAdapter(Context context, int resource, List<CategoryNode> objects) {
+        super(context, resource, objects);
+>>>>>>> origin/master
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+<<<<<<< HEAD
         View rowView = inflater.inflate(mResourceId, parent, false);
+=======
+        View rowView = inflater.inflate(R.layout.categories_row, parent, false);
+>>>>>>> origin/master
         TextView textView = (TextView) rowView.findViewById(R.id.categoryRowText);
         ImageView levelIndicatorView = (ImageView) rowView.findViewById(R.id.categoryRowLevelIndicator);
         textView.setText(Html.fromHtml(getItem(position).getName()));

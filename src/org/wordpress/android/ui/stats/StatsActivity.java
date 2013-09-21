@@ -1,7 +1,14 @@
 package org.wordpress.android.ui.stats;
 
+<<<<<<< HEAD
 import android.content.BroadcastReceiver;
 import android.content.Context;
+=======
+import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.DialogInterface;
+>>>>>>> origin/master
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
@@ -23,9 +30,17 @@ import org.json.JSONObject;
 
 import org.wordpress.android.R;
 import org.wordpress.android.WordPress;
+<<<<<<< HEAD
 import org.wordpress.android.ui.OldStatsActivity;
 import org.wordpress.android.ui.WPActionBarActivity;
 import org.wordpress.android.util.StatsRestHelper;
+=======
+import org.wordpress.android.ui.AuthenticatedWebViewActivity;
+import org.wordpress.android.ui.OldStatsActivity;
+import org.wordpress.android.ui.WPActionBarActivity;
+import org.wordpress.android.util.StatsRestHelper;
+import org.xmlrpc.android.ApiHelper;
+>>>>>>> origin/master
 
 /**
  * The native stats activity, accessible via the menu drawer.
@@ -38,6 +53,10 @@ public class StatsActivity extends WPActionBarActivity implements StatsNavDialog
 
     private static final String SAVED_NAV_POSITION = "SAVED_NAV_POSITION";
     private static final String SAVED_WP_LOGIN_STATE = "SAVED_WP_LOGIN_STATE";
+<<<<<<< HEAD
+=======
+    private static final int REQUEST_JETPACK = 7000;
+>>>>>>> origin/master
     
     private StatsAbsViewFragment mStatsViewFragment;
     private View mActionbarNav;
@@ -130,6 +149,10 @@ public class StatsActivity extends WPActionBarActivity implements StatsNavDialog
         // for self-hosted sites; launch the user into an activity where they can provide their credentials 
         if (!WordPress.hasValidWPComCredentials(this) && mResultCode != RESULT_CANCELED) {
             startWPComLoginActivity();
+<<<<<<< HEAD
+=======
+            return;
+>>>>>>> origin/master
         }
         
         if (!mIsRestoredFromState)
@@ -179,7 +202,44 @@ public class StatsActivity extends WPActionBarActivity implements StatsNavDialog
                 refreshStats();
         }
     }
+<<<<<<< HEAD
     
+=======
+
+    private void verifyJetpackSettings() {
+        new ApiHelper.RefreshBlogContentTask(this, WordPress.getCurrentBlog(), new ApiHelper.RefreshBlogContentTask.Callback() {
+            @Override
+            public void onSuccess() {
+                if (getBlogIdFromJetpack() == null) {
+                    // Blog has not returned a jetpack_client_id
+                    AlertDialog.Builder builder = new AlertDialog.Builder(StatsActivity.this);
+                    builder.setMessage("The Jetpack plugin is required for stats. Do you want to install Jetpack?")
+                            .setTitle("Jetpack plugin not found");
+                    builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Intent jetpackIntent = new Intent(StatsActivity.this, AuthenticatedWebViewActivity.class);
+                            jetpackIntent.putExtra(AuthenticatedWebViewActivity.LOAD_AUTHENTICATED_URL, WordPress.getCurrentBlog().getAdminUrl()
+                                    + "plugin-install.php?tab=search&s=jetpack+by+wordpress.com&plugin-search-input=Search+Plugins");
+                            startActivityForResult(jetpackIntent, REQUEST_JETPACK);
+                        }
+                    });
+                    builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // User cancelled the dialog
+                        }
+                    });
+                    builder.create().show();
+                }
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        }).execute(false);
+    }
+
+>>>>>>> origin/master
     protected void showViews() {
         FragmentManager fm = getSupportFragmentManager();
         mNavFragment = (DialogFragment) fm.findFragmentByTag(StatsNavDialogFragment.TAG);
@@ -267,8 +327,17 @@ public class StatsActivity extends WPActionBarActivity implements StatsNavDialog
         
         if (WordPress.getCurrentBlog().isDotcomFlag())
             blogId = String.valueOf(WordPress.getCurrentBlog().getBlogId());
+<<<<<<< HEAD
         else  
             blogId = getBlogIdFromJetPack();
+=======
+        else  {
+            blogId = getBlogIdFromJetpack();
+            if (blogId == null) {
+                verifyJetpackSettings();
+            }
+        }
+>>>>>>> origin/master
         
         StatsRestHelper.getStatsSummary(blogId);
         
@@ -278,7 +347,11 @@ public class StatsActivity extends WPActionBarActivity implements StatsNavDialog
         }
     }
 
+<<<<<<< HEAD
     private String getBlogIdFromJetPack() {
+=======
+    private String getBlogIdFromJetpack() {
+>>>>>>> origin/master
         // for self-hosted blogs
         try {
             JSONObject options = new JSONObject(WordPress.getCurrentBlog().getBlogOptions());

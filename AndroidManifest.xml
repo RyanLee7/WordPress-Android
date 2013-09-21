@@ -149,6 +149,7 @@
         <!-- Theme Activities -->
         <activity android:name=".ui.themes.ThemeBrowserActivity" >
         </activity>
+<<<<<<< HEAD
 
         <!-- Native Reader Activities -->
         <activity
@@ -178,6 +179,11 @@
 
         <!-- Other activities -->
         
+=======
+                
+        <!-- Other activities -->
+
+>>>>>>> origin/master
         <activity android:name=".ui.ShareIntentReceiverActivity" android:theme="@style/FloatingActivityTheme">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
@@ -204,6 +210,12 @@
             </intent-filter>
         </activity>
         <activity
+<<<<<<< HEAD
+=======
+            android:name=".ui.AuthenticatedWebViewActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+        <activity
+>>>>>>> origin/master
             android:name=".ui.DashboardActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity

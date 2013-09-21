@@ -3,6 +3,7 @@
  */
 package org.wordpress.android.models;
 
+<<<<<<< HEAD
 import android.os.Bundle;
 import android.text.Html;
 import android.text.SpannableStringBuilder;
@@ -22,6 +23,26 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 
+=======
+import android.text.Html;
+import android.text.Spanned;
+import android.util.Log;
+import android.text.style.QuoteSpan;
+import android.text.SpannableStringBuilder;
+
+import java.util.Map;
+import java.util.HashMap;
+
+import org.json.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import org.wordpress.android.util.JSONUtil;
+import org.wordpress.android.util.Emoticons;
+import org.wordpress.android.util.WPHtml;
+import org.wordpress.android.util.WPHtmlTagHandler;
+
+>>>>>>> origin/master
 public class Note {
     protected static final String TAG="NoteModel";
     public static final String UNKNOWN_TYPE="unknown";
@@ -36,17 +57,23 @@ public class Note {
     private static final String NOTE_ACTION_REPLY="replyto-comment";
     private static final String REPLY_CONTENT_PARAM_KEY="content";
 
+<<<<<<< HEAD
     private static final Map<String, String> pnType2type = new Hashtable<String, String>() {{
         put("c", "comment");
     }};
 
 
+=======
+>>>>>>> origin/master
     private Map<String,JSONObject> mActions;
     private Reply mReply;
     private JSONObject mNoteJSON;
     private SpannableStringBuilder mComment = new SpannableStringBuilder();
+<<<<<<< HEAD
     private boolean mPlaceholder = false;
 
+=======
+>>>>>>> origin/master
     /**
      * Create a note using JSON from REST API
      */
@@ -56,6 +83,7 @@ public class Note {
         cleanupComment();
     }
 
+<<<<<<< HEAD
     /**
      * Create a placeholder note from a Push Notification payload
      */
@@ -115,6 +143,12 @@ public class Note {
         return getSubject();
     }
 
+=======
+    public String toString(){
+        return getSubject();
+    }
+    
+>>>>>>> origin/master
     public JSONObject toJSONObject(){
         return mNoteJSON;
     }
@@ -254,6 +288,7 @@ public class Note {
     public <U> U queryJSON(String query, U defaultObject){
         return JSONUtil.queryJSON(this.toJSONObject(), query, defaultObject);
     }
+<<<<<<< HEAD
 
     public static class TimeStampComparator implements Comparator<Note> {
         @Override
@@ -262,6 +297,8 @@ public class Note {
         }
     }
 
+=======
+>>>>>>> origin/master
     /**
      * Represents a user replying to a note. Holds
      */

@@ -82,7 +82,11 @@
             android:layout_marginTop="30dp"
             android:clickable="true"
             android:onClick="onClick"
+<<<<<<< HEAD
             android:text="@string/automattic_url"
+=======
+            android:text="automattic.com"
+>>>>>>> origin/master
             android:textSize="18sp" />
     </LinearLayout>
 
